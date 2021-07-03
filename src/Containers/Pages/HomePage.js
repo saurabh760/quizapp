@@ -12,7 +12,7 @@ function HomePage() {
                             Test your skills with Free online quizes
                         </p>
                         <button className="btn btn-primary">
-                            <Link style={{ textDecoration: "none", color: "white" }} to="/add-quiz"> Add Quiz</Link>
+                            <Link style={{ textDecoration: "none", color: "white" }} to="/deskboard">click for your quiz</Link>
 
                         </button>
 
