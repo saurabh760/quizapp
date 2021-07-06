@@ -1,6 +1,5 @@
 import React from 'react'
-import { InputGroup } from 'react-bootstrap'
-import { FormControl } from 'react-bootstrap'
+
 import {useDispatch} from 'react-redux'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -19,17 +18,19 @@ const [optionsDetails, setOptionsDetails] = useState([]);
 const dispatch = useDispatch();
 const temp = {
     quizname: "",
-    questions: []
+    questions: [],
+    quizScore: 0
+    
 }
 
 useEffect(() => {
     if (!quizDetails) setQuizDetails(temp);
-    if (optionsDetails.length == 0) setOptionsDetails([...optionsDetails, ""])
-})
+    if (optionsDetails.length === 0) setOptionsDetails([...optionsDetails, ""])
+},[])
 
 const newOption = () => {
     let check = false;
-    optionsDetails.map((item) => {
+    optionsDetails.map=((item) => {
         if (item === "") {
             console.log("something wrong")
             check = true;
@@ -46,12 +47,12 @@ const handleQuiz = () =>{
         if (document.querySelector("input[name=optionName]:checked"))
             sel = document.querySelector("input[name=optionName]:checked").value;
         else error = true;
-        optionsDetails.map((item) => {
+        optionsDetails.map=((item) => {
             if (item === "") {
                 error = true;
             }
         })
-        if (quizname == "" || questionBody == "") error = true;
+        if (quizname === "" || questionBody === "") error = true;
         if (error) {
             console.log("fill all fields ")
             return false;
@@ -61,7 +62,7 @@ const handleQuiz = () =>{
         const question = {
             questionBody: questionBody,
             options: [...optionsDetails],
-            answer: nxt,
+            answer: [nxt],
         }
         var newQ = { ...quizDetails };
         console.log(newQ);

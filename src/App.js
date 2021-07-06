@@ -2,18 +2,18 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect
+  Route
 } from "react-router-dom";
 import HomePage from "./Containers/Pages/HomePage";
 import DeskBoard from "./Containers/Pages/DeskBoard";
 import ProfilePage from "./Containers/Pages/ProfilePage";
 import CreateQuizPage from "./Containers/Pages/CreateQuizPage";
 import RegestrationPage from "./Containers/Pages/RegestrationPage";
-import { useEffect } from "react";
 import LoginPage from "./Containers/Pages/LoginPage";
 import Logout from "./Containers/Pages/Logout";
-import QuizAttemp from "./Containers/Pages/QuizAttempPage";
+import QuizAttemp from "./Containers/Pages/QuizPage";
+import CreateMAnswerQ from "./Containers/Pages/CreateMAnsweQ";
+import ResultPage from "./Containers/Pages/ResultPage"
 
 function App() {
   return (
@@ -25,9 +25,11 @@ function App() {
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/home" component={HomePage} />
           <Route exact path="/deskboard" component={DeskBoard} />
-          <Route exact path="/QuizAttemp" component={QuizAttemp} />
           <Route exact path="/profile" component={ProfilePage} />
           <Route exact path="/add-Quiz" component={CreateQuizPage} />
+          <Route exact path="/CreateMAnswerQ" component={CreateMAnswerQ} />
+          <Route exact path="/:quizname" component={QuizAttemp} />
+          <Route exact path="/:quizname/result" component={ResultPage} />
         </Switch>
       </Router>
     </div>

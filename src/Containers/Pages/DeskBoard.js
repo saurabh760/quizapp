@@ -1,50 +1,37 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import Layout from '../../Components/Layout'
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom"
 
-
-const DeskBoard =(props) => {
-    const quizdata =useSelector((state) => state.quizData);
-    console.log("quizdata",quizdata.quizData)
-
-    const renderb = () =>{
-        return quizdata.quizData.map((item) =>{
-            return (
-                    <div>
-                    <button onClick={submit} style ={{  marginTop:"8px", textAlign:'center', position:'center'}} className="btn btn-white">
-                    <Link style={{  textDecoration: "none", textAlign:'center',color: "green", }} to={`/:${item.quizname}`}>
+function DeskBoard() {
+    const quizdata = useSelector((state) => state.quizData);
+    console.log("quizdata", quizdata.quizData)
+    const renderButtons = () => {
+        return quizdata.quizData.map((item) => {
+            return <div>
+                <button style={{ marginTop: "10px" }} className="btn btn" >
+                    <Link style={{ textDecoration: "none", color: "green" }} to={`/:${item.quizname}`} >
                         {
                             item.quizname
                         }
                     </Link>
-                    </button>
-                    </div>
-                    
-                     )   
-                     
-                        }
-   
-    ) 
-}
-const submit = () => {
-    console.log("hello");
-   
-    props.history.push('/QuizAttemp');
-     }
+                </button>
+            </div>
+        })
+    }
+    return (
+        <Layout>
+            <br />
+            <br />
+            <br />
 
-return (
-<Layout>
-<br/>
-<br/>
-<div style ={{textAlign:'center'}}>
-{
-    renderb()
+            <div style={{ textAlign: "center" }}>
+                {
+                    renderButtons()
+                }
+            </div>
+        </Layout>
+    )
 }
-</div>
-</Layout>
 
-)
-
-}
 export default DeskBoard

@@ -24,6 +24,20 @@ export default (state = initState, action) => {
                 quizData: newQuizData
             }
             break;
+            case quizDataConstants.UPDATE_QUIZ_SCORE:
+            var currentState = state.quizData;
+            console.log("gffa",action.payload.score)
+            console.log("curr->", currentState);
+            currentState.map((item, index) => {
+                if (index == action.payload.quizIndex) {
+                    item.quizScore = action.payload.score
+                }
+            });
+            state = {
+                ...state,
+                quizData: currentState
+            }
+            break;
     }
     return state;
 };

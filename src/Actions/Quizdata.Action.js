@@ -12,5 +12,14 @@ export const addQuiz = (quizData) => {
             });
         }
         }
+
+        export const addQuizScore = (data) => {
+            return (dispatch) => {
+                dispatch({
+                    type: quizDataConstants.UPDATE_QUIZ_SCORE,
+                    payload: data
+                });
+            }
+        }
     
 
