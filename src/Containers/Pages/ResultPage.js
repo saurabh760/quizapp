@@ -14,15 +14,15 @@ const ResultPage = (props) => {
     console.log(urll);
     var load_url = ""
     for (var i = 2; i < urll.length; i++) {
-        if (urll[i] == '/') break;
+        if (urll[i] === '/') break;
         load_url = load_url + urll[i];
     }
     var score = 0;
-    quizData.quizData.map((item) => {
-        if (item.quizname == load_url) {
+    quizData.quizData.map((item) =>{
+        if (item.quizname === load_url) {
             score = item.quizScore
         }
-    })
+})
     return (
         <div>
             <br />

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect } from 'react';
+
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addQuizScore } from '../../Actions/Quizdata.Action';
@@ -78,12 +78,25 @@ const QuizPage = (props) => {
     }
     const handleSubmitQuiz = () => {
         if (!add()) return false;
+        console.log("sel",data.questions);
         console.log("---->", selectedAnswers);
         var score = 0;
-        data.questions.map=((item, index) => {
-            if (data.questions[index].answer === selectedAnswers[index]) score++;
-        });
-        console.log("\\\\\\\\\\")
+        for(var i=0;i<data.questions.length-1;i++) {
+            console.log("as->",data.questions[i].answer);
+            if (data.questions[i].answer[0] === selectedAnswers[i]) {
+                console.log("here");
+                score++;
+            } 
+        }
+        // data.questions.map=((item, index) => {
+        //     console.log("as->",data.questions[index].answer);
+        //     if (data.questions[index].answer[0] === selectedAnswers[index]) {
+        //         console.log("here");
+        //         score++;
+        //     } 
+        // });
+        // console.log("\\\\\\\\\\");
+        // console.log(score);
         dispatch(addQuizScore({ quizIndex, score }));
         console.log("\\\\\\\\\\")
         props.history.push(`/:${load_url}/result`);
@@ -102,7 +115,7 @@ const QuizPage = (props) => {
                         </div>
                     }
                     <div className="form-group">
-                        <label><i className="fas fa-envelope prefix"> Question_No :</i>{questionNum + 1} </label>
+                        <label><i className="fas fa-envelope prefix"> Qu :</i>{questionNum + 1} </label>
                         {data.questions[questionNum] && (<input value={data.questions[questionNum].questionBody} style={{ backgroundColor: "white" }} type="text" disabled className="form-control" />)}
 
                     </div>

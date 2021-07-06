@@ -14,6 +14,7 @@ export const addQuiz = (quizData) => {
         }
 
         export const addQuizScore = (data) => {
+            console.log("data->",data);
             return (dispatch) => {
                 dispatch({
                     type: quizDataConstants.UPDATE_QUIZ_SCORE,
