@@ -22,9 +22,10 @@ const ResultPage = (props) => {
         if (item.quizname === load_url) {
             score = item.quizScore
         }
+        return true
 })
     return (
-        <div>
+      <div>
             <br />
             <br />
             <br />
@@ -41,8 +42,8 @@ const ResultPage = (props) => {
                         <Link style={{ textDecoration: "none", color: "red" }} to="/home"> click here for home page</Link>
                     </button>
                 </div>
-            </div>
-        </div>
+           </div>
+        </div> 
     )
 
 }

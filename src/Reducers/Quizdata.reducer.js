@@ -5,20 +5,19 @@ import { quizDataConstants } from "../Constants";
 const initState = {
     quizData: []
 }
-export default (state = initState, action) => {
+const det = (state = initState, action) => {
     switch (action.type) {
         
         case quizDataConstants.QUIZDATA_REQUEST:
-            console.log("q212345");
+            // console.log("q212345");
             state = {
                 ...initState
             }
             break;
         case quizDataConstants.QUIZDATA_SUCCESS:
-            //state.quizData.push(action.payload)
             var newQuizData = state.quizData;
             newQuizData.push(action.payload)
-            console.log("ashhjhjaska",newQuizData);
+            // console.log("ashhjhjaska",newQuizData);
             state = {
                 ...state,
                 quizData: newQuizData
@@ -32,6 +31,7 @@ export default (state = initState, action) => {
                 if (index === action.payload.quizIndex) {
                     item.quizScore = action.payload.score
                 }
+                return true
             });
             console.log("updated",currentState);
             state = {
@@ -39,6 +39,9 @@ export default (state = initState, action) => {
                 quizData: currentState
             }
             break;
+            default:return state;
+            
     }
-    return state;
+    return state
 };
+export default det;

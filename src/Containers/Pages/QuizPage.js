@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React from 'react';
+import Button from '@material-ui/core/Button';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addQuizScore } from '../../Actions/Quizdata.Action';
@@ -21,6 +21,7 @@ const QuizPage = (props) => {
         if (item.quizname === load_url) {
             quizIndex = index;
         }
+        return true;
     })
     const [questionNum, setQuestionNum] = useState(0);
     const dispatch = useDispatch();
@@ -38,12 +39,12 @@ const QuizPage = (props) => {
     }
     const setCheckValue = () => {
         console.log("===>", selectedAnswers);
-        if (selectedAnswers[questionNum] == -1) {
+        if (selectedAnswers[questionNum] ===-1) {
             removeCheckedValue();
         }
         else {
             for (var i = 0; i < document.getElementsByName("optionName").length; i++) {
-                if (i == selectedAnswers[questionNum]) document.getElementsByName("optionName")[i].checked = true;
+                if (i === selectedAnswers[questionNum]) document.getElementsByName("optionName")[i].checked = true;
                 else document.getElementsByName("optionName")[i].checked = false;
             }
         }
@@ -66,7 +67,7 @@ const QuizPage = (props) => {
         setQuestionNum(questionNum - 1);
     }
     const add = () => {
-        var sel, error = false;
+        var sel;
         if (document.querySelector("input[name=optionName]:checked")) {
             sel = document.querySelector("input[name=optionName]:checked").value;
             var ind = data.questions[questionNum].options.indexOf(sel);
@@ -81,22 +82,13 @@ const QuizPage = (props) => {
         console.log("sel",data.questions);
         console.log("---->", selectedAnswers);
         var score = 0;
-        for(var i=0;i<data.questions.length-1;i++) {
+        for(var i=0;i<data.questions.length;i++) {
             console.log("as->",data.questions[i].answer);
             if (data.questions[i].answer[0] === selectedAnswers[i]) {
                 console.log("here");
                 score++;
             } 
         }
-        // data.questions.map=((item, index) => {
-        //     console.log("as->",data.questions[index].answer);
-        //     if (data.questions[index].answer[0] === selectedAnswers[index]) {
-        //         console.log("here");
-        //         score++;
-        //     } 
-        // });
-        // console.log("\\\\\\\\\\");
-        // console.log(score);
         dispatch(addQuizScore({ quizIndex, score }));
         console.log("\\\\\\\\\\")
         props.history.push(`/:${load_url}/result`);
@@ -111,7 +103,7 @@ const QuizPage = (props) => {
                 <div className="jumbotron">
                     {
                         <div className="form-group">
-                            <h1>{data.quizname}</h1>
+                            <h1 style={{textAlign:"center",color:"green"}}>{data.quizname}</h1>
                         </div>
                     }
                     <div className="form-group">
@@ -119,7 +111,7 @@ const QuizPage = (props) => {
                         {data.questions[questionNum] && (<input value={data.questions[questionNum].questionBody} style={{ backgroundColor: "white" }} type="text" disabled className="form-control" />)}
 
                     </div>
-                    <div>Options :</div>
+                    <div><i className="fas fa-envelope prefix">Options:</i></div>
                     {
                         data.questions[questionNum].options.map((item, index) => {
                             return <div style={{ marginTop: "4px" }} className="input-group">
@@ -134,24 +126,28 @@ const QuizPage = (props) => {
 
                     <div style={{ marginTop: "10px" }}>
                         {
-                            questionNum > 0 && (<button style={{ marginRight: "7px" }} onClick={handlePrevious} className="btn btn-primary">
-                                Previos Question
-                            </button>)
+                            questionNum > 0 && (<Button style={{ marginLeft: "7px" }} variant="contained" color="primary" size="small"  onClick={handlePrevious}>
+                                                        Previos Question
+                           
+                            </Button>)
                         }
                         {
-                            questionNum < data.questions.length - 1 && <button style={{ marginRight: "7px" }} onClick={handleNextQuestion} className="btn btn-dark">
+                            questionNum < data.questions.length - 1 &&<Button style={{ marginLeft: "7px" }} variant="contained" color="primary" size="small"  onClick={handleNextQuestion}>
                                 next Question
-                            </button>
+                            </Button>
                         }
 
                         <br /><br />
                         {
-                            questionNum == data.questions.length - 1 && <button onClick={handleSubmitQuiz} className="btn btn-danger">Submit Quiz </button>
+                            questionNum === data.questions.length - 1 && <Button style={{ marginLeft: "7px" }} variant="contained" color="secondary" size="large"  onClick={handleSubmitQuiz}>
+                            Submit
+                           </Button>
+                            //  questionNum === data.questions.length - 1 && <button onClick={handleSubmitQuiz} className="btn btn-danger">Submit Quiz </button>
                         }
 
                     </div>
                 </div>
-            </div>
+           </div>
             {
                 setCheckValue()
             }

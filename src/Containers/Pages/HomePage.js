@@ -1,6 +1,8 @@
 import React from 'react'
 import Layout from '../../Components/Layout'
+import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
+{/* <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /> */}
 function HomePage() {
     return (
         <Layout>
@@ -11,11 +13,13 @@ function HomePage() {
                         <p style={{ alignText: "center", color: "lightgrey", fontFamily: "Comic Sans MS" }}>
                             Test your skills with Free online quizes
                         </p>
-                        <button className="btn btn-primary">
+                        {/* <button className="btn btn-primary">
                             <Link style={{ textDecoration: "none", color: "white" }} to="/add-quiz">click for add quizes</Link>
 
-                        </button>
-
+                        </button> */}
+                        <Button variant="contained" color="primary">
+                        <Link style={{ textDecoration: "none", color: "white" }} to="/add-quiz">click for add quizes</Link>
+                        </Button>
                     </div>
                 </div>
             </div>

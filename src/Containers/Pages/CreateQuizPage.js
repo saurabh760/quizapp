@@ -1,5 +1,7 @@
 import React from 'react'
-
+import Button from '@material-ui/core/Button';
+// import Icon from '@material-ui/core/Icon';
+import SaveIcon from '@material-ui/icons/Save';
 import {useDispatch} from 'react-redux'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -30,9 +32,9 @@ useEffect(() => {
 
 const newOption = () => {
     let check = false;
-    optionsDetails.map=((item) => {
+        optionsDetails.map=((item) => {
         if (item === "") {
-            console.log("something wrong")
+            // console.log("something wrong")
             check = true;
         }
     })
@@ -42,10 +44,11 @@ const newOption = () => {
 
 
 const handleQuiz = () =>{
-    let sel;
-        let error = false;
+    var imp;
+        var error = false;
         if (document.querySelector("input[name=optionName]:checked"))
-            sel = document.querySelector("input[name=optionName]:checked").value;
+            imp = document.querySelector("input[name=optionName]:checked").value;
+                 
         else error = true;
         optionsDetails.map=((item) => {
             if (item === "") {
@@ -57,8 +60,8 @@ const handleQuiz = () =>{
             console.log("fill all fields ")
             return false;
         }
-        const nxt = optionsDetails.indexOf(sel);
-        console.log(sel, nxt);
+        const nxt = optionsDetails.indexOf(imp);
+        console.log(imp, nxt);
         const question = {
             questionBody: questionBody,
             options: [...optionsDetails],
@@ -90,7 +93,7 @@ const handleQuiz = () =>{
             <div className="container">  
             <div className ="jumbotron">
                 <br/>
-            <p><h1 style ={{textAlign:"center"}}>Add Quiz</h1></p>
+            <p><h1 style ={{textAlign:"center", color:"red"}}>Add Quiz</h1></p>
             <br/>
             
             <div className="container">
@@ -103,12 +106,12 @@ const handleQuiz = () =>{
                           
 
                        <div className="md-form form-sm mb-5">
-                          <i className="fas fa-envelope prefix"> Question_No:{numOfQuestion}</i>
+                          <i  className="fas fa-envelope prefix"> Question_No:{numOfQuestion}</i>
                           <input type="text" value={questionBody} placeholder="enter your question here" onChange={(e) => setQuestionBody(e.target.value)} className="col-sm-5" class="form-control form-control-sm validate" required/>
                           <label> </label>
                           
                           </div>
-                          <div>Options:</div>
+                          <div><i className="fas fa-envelope prefix">Options:</i></div>
                          
                     {
                         optionsDetails.length > 0 &&
@@ -116,6 +119,7 @@ const handleQuiz = () =>{
                             return <div style={{ marginTop: "4px" }} className="input-group">
                             <div className="input-group-text">
                                 <input  name="optionName" className="form-check-input mt-0" type="radio" value={item} />
+                                
                             </div>
                                 <input type="text" value={item} onChange={(e) => {
                                     var newArr = [...optionsDetails];
@@ -132,9 +136,15 @@ const handleQuiz = () =>{
                         </button>
                         
                         <br /><br />
-                        <button style={{ marginRight: "5px" }} className="btn btn-primary" onClick={handleQuiz} >Add New Question </button>
+                        <Button variant="contained" color="primary"  size="large"  onClick={handleQuiz}>
+                           New Question
+                        </Button>
+                        {/* <button style={{ marginRight: "5px" }} className="btn btn-primary" onClick={handleQuiz} >New Question </button> */}
                       {
-                       numOfQuestion > 5 && <button className="btn btn-danger" onClick={submit}>submit_quiz</button>
+                    //    numOfQuestion > 5 && <button className="btn btn-danger" onClick={submit}>submit_quiz</button>
+                    numOfQuestion > 5 && <Button style={{ marginLeft: "7px" }} variant="contained" color="secondary" size="large"  startIcon={<SaveIcon />} onClick={submit}>
+                    Save Quiz
+                   </Button>
                       }
                 </div>
                 </div>
@@ -144,7 +154,8 @@ const handleQuiz = () =>{
 
         </Layout>
    
-    )}}
+    )}
+}
 
 export default CreateQuizPage
 

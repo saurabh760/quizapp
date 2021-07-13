@@ -1,4 +1,5 @@
 import React from 'react'
+import { useEffect } from 'react';
 import { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom"
@@ -8,40 +9,34 @@ import { Link } from "react-router-dom"
 * @function LoginPage
 **/
 
-
 const LoginPage = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [isError, setIsError] = useState(false);
     const user = useSelector((state) => state.userData);
-    const handleLogin = () => {
-      
-        // const isError = (errorMsg) => {
-        //     setErrorMessage(errorMsg);
-        //     setIsError(true);
-        //     setTimeout(() => {
-        //         setIsError(false);
-        //     }, 1500);
-
+    const handleLogin = (e) => {
+        e.preventDefault();
         const loginEmail = user.email, loginPassword = user.password;
+        if (email === "" || password === "") {
+            setErrorMessage('Please Enter Data!!');
+            setIsError(true);
+            setTimeout(() => {
+                setIsError(false);
+            }, 1500);
+            return false;
+        }
         if (loginEmail !== email || loginPassword !== password) {
             setErrorMessage('Invalid Login Credential');
             setIsError(true);
             setTimeout(() => {
                 setIsError(false);
             }, 1500);
-        }
-        else if(loginEmail ==="" || loginPassword ===""){
-            setErrorMessage('Invalid Login Credential');
-            setIsError(true);
-            setTimeout(() => {
-                setIsError(false);
-            }, 1500);
-        }
-        else {
+            return false;
+        } else {
             props.history.push('/home');
         }
+        return false;
     }
     return (
         <>
@@ -68,7 +63,7 @@ const LoginPage = (props) => {
                                 className="form-control" id="passwordLogin"
                                 placeholder="Enter Password" />
                         </div>
-                        <button className="btn btn-primary" onClick={handleLogin}>Login</button>
+                        <button className="btn btn-primary" onClick={(e) => handleLogin(e)}>Login</button>
                         <button style={{ marginLeft: "10px" }} className="btn btn-danger">
                             <Link style={{ textDecoration: "none", color: "white" }} to="/">Regester Here</Link>
                         </button>
