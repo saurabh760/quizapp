@@ -13,15 +13,12 @@ function DeskBoard() {
              <button style={{ marginTop: "10px" }} className="btn btn" >
                 {/* <Button href="#text-buttons" color="primary"> */}
  
-
-               
                     <Link style={{ textDecoration: "none", color: "green" }} to={`/:${item.quizname}`} >
                         {
                             item.quizname
                         }
                     </Link>
-
-                    {/* </Button> */}
+               {/* </Button> */}
                     </button>
             </div>
         })

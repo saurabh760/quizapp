@@ -8,7 +8,7 @@ const initState = {
     loading: false
   
 }
-export default (state = initState, action) => {
+ const Funb= (state = initState, action) => {
     switch (action.type) {
         case loginConstants.LOGIN_REQUEST:
             state = {
@@ -25,6 +25,8 @@ export default (state = initState, action) => {
                 password: action.payload.password,
             }
             break;
+            
     }
     return state;
 }
+export default Funb

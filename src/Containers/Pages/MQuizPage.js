@@ -31,64 +31,30 @@ const QuizPage = (props) => {
         setSelectedAnswers(temp);
     }
     const removeCheckedValue = () => {
-        if (data.questions[questionNum].questionType === 1){
         if (document.querySelector("input[name=optionName]")) {
             for (var i = 0; i < document.getElementsByName("optionName").length; i++) {
                 document.getElementsByName("optionName")[i].checked = false;
             }
         }
     }
-    else if (data.questions[questionNum].questionType === 2) {
-        if (document.querySelectorAll("input[name=optionName]")) {
-            for (i = 0; i < document.getElementsByName("optionName").length; i++) {
-                document.getElementsByName("optionName")[i].checked = false;
-            }
-        }
-    }
-    }
-    const setCheckValue = () =>
-     {
+    const setCheckValue = () => {
         console.log("===>", selectedAnswers);
-        if (selectedAnswers[questionNum] ===-1 && selectedAnswers[questionNum][0]) 
-        {
+        if (selectedAnswers[questionNum] ===-1) {
             removeCheckedValue();
         }
         else {
-        if(data.questions[questionNum].questionType === 1)
-         {
-            for (var i = 0; i < document.getElementsByName("optionName").length; i++)
-             {
+            for (var i = 0; i < document.getElementsByName("optionName").length; i++) {
                 if (i === selectedAnswers[questionNum]) document.getElementsByName("optionName")[i].checked = true;
                 else document.getElementsByName("optionName")[i].checked = false;
             }
         }
-        else if(data.questions[questionNum].questionType === 2)
-        {
-            for (let i = 0; i < document.getElementsByName("optionName").length; i++)
-             {
-                var emp = false;
-                for (var j = 0; j < selectedAnswers[questionNum].length; j++)
-                 {
-                    if (i === selectedAnswers[questionNum][j]) emp = true;
-                }
-                if (emp) 
-                {
-                    document.getElementsByName("optionName")[i].checked = true;
-                }
-                else document.getElementsByName("optionName")[i].checked = false;
-            }
-            
-        }
-   }
     }
     const handleNextQuestion = () => {
-        var mb, error = false;
-        if (data.questions[questionNum].questionType === 1)
-        {
+        var sel, error = false;
         if (document.querySelector("input[name=optionName]:checked")) {
-           mb = document.querySelector("input[name=optionName]:checked").value;
-            var nxt = data.questions[questionNum].options.indexOf(mb);
-            selectedAnswers[questionNum] = nxt;
+            sel = document.querySelector("input[name=optionName]:checked").value;
+            var ind = data.questions[questionNum].options.indexOf(sel);
+            selectedAnswers[questionNum] = ind;
             setSelectedAnswers(selectedAnswers);
             setQuestionNum(questionNum + 1);
         }
@@ -97,30 +63,12 @@ const QuizPage = (props) => {
             return false;
         }
     }
-    if (data.questions[questionNum].questionType === 2){
-        {
-            if (document.querySelectorAll("input[name=optionName]:checked")) {
-                var ab = [];
-                for (var i = 0; i < document.querySelectorAll("input[name=optionName]:checked").length; i++) {
-                    mb = document.querySelectorAll("input[name=optionName]:checked")[i].value;
-                    var ind = data.questions[questionNum].options.indexOf(mb);
-                    ab.push(ind);
-                }
-                selectedAnswers[questionNum] = ab;
-                setSelectedAnswers(selectedAnswers);
-                setQuestionNum(questionNum + 1);
-            }
-            else return false;
-        } 
-
-    }
-}
     const handlePrevious = () => {
         setQuestionNum(questionNum - 1);
     }
-    const prv= () => {
+    const add = () => {
         var sel;
-       if(data.questions[questionNum].questionType === 1){
+       
         if (document.querySelector("input[name=optionName]:checked")) {
             sel = document.querySelector("input[name=optionName]:checked").value;
             var ind = data.questions[questionNum].options.indexOf(sel);
@@ -130,24 +78,10 @@ const QuizPage = (props) => {
         }
         return false;
     }
-        if (data.questions[questionNum].questionType === 2) {
-            if (document.querySelectorAll("input[name=optionName]:checked")) {
-                var xx = [];
-                for (var i = 0; i < document.querySelectorAll("input[name=optionName]:checked").length; i++) {
-                    sel = document.querySelector("input[name=optionName]:checked").value;
-                    let ind = data.questions[questionNum].options.indexOf(sel);
-                    xx.push(ind);
-                }
-                selectedAnswers[questionNum] = xx;
-                setSelectedAnswers(selectedAnswers);
-            }
-            else return false;
-        }
-    }
     const handleSubmitQuiz = () => {
-        if (!prv()) return false;
-        // console.log("sel",data.questions);
-        // console.log("---->", selectedAnswers);
+        if (!add()) return false;
+        console.log("sel",data.questions);
+        console.log("---->", selectedAnswers);
         var score = 0;
         for(var i=0;i<data.questions.length;i++) {
             console.log("as->",data.questions[i].answer);
@@ -165,6 +99,7 @@ const QuizPage = (props) => {
         <>
             <br />
             <br />
+            <br />
             <div className="container">
                 <div className="jumbotron">
                     {
@@ -179,17 +114,14 @@ const QuizPage = (props) => {
                     </div>
                     <div><i className="fas fa-envelope prefix">Options:</i></div>
                     {
-                        (data.questions[questionNum].options && (data.questions[questionNum].options.map((item, index) => {
+                        data.questions[questionNum].options.map((item, index) => {
                             return <div style={{ marginTop: "4px" }} className="input-group">
                                 <div className="input-group-text">
-                                    <input name="optionName" className="form-check-input mt-0" type={data.questions[questionNum].questionType === 1 ? "radio" : "checkbox"} value={item} />
+                                <input  name="optionName" className="form-check-input " type="checkbox" value={item} />
                                 </div>
                                 <input disabled style={{ backgroundColor: "white" }} type="text" value={item} className="form-control" />
                             </div>
-                        }
-                        )
-                        )
-                        )
+                        })
                     }
 
 

@@ -26,7 +26,7 @@ const det = (state = initState, action) => {
             case quizDataConstants.UPDATE_QUIZ_SCORE:
             var currentState = state.quizData;
             // console.log("curr->", currentState);
-            // console.log("---->",action.payload);
+            // console.log(action.payload);
             currentState.map((item, index) => {
                 if (index === action.payload.quizIndex) {
                     item.quizScore = action.payload.score

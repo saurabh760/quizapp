@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from "react-router-dom"
+import './css/resultstyle.css'
 
 
 /**
@@ -24,13 +25,15 @@ const ResultPage = (props) => {
         }
         return true
 })
-    return (
-      <div>
+{
+    return ( 
+      <div >
+          <div>
             <br />
             <br />
             <br />
 
-            <div className="container">
+            <div className="container" >
                 <div style={{ textAlign: "center" }} className="jumbotron">
                                     <h4 style={{ color: "green" }}>
                         Your Score is : {score}
@@ -43,9 +46,11 @@ const ResultPage = (props) => {
                     </button>
                 </div>
            </div>
+        </div>
         </div> 
     )
 
+}
 }
 
 export default ResultPage
