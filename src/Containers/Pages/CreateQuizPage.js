@@ -19,7 +19,7 @@ const CreateQuizPage = (props) => {
    // const [qcheck, setqcheck] = useState(true);
     const dispatch = useDispatch();
     const temp = {
-      quizname: "",
+      quizName: "",
       questions: [],
       quizScore: 0,
     };
@@ -33,7 +33,7 @@ const CreateQuizPage = (props) => {
     console.log(optionsDetails,'op')
     
     optionsDetails.map((item) => {
-      console.log(item,'item')
+      console.log(quizname,'item')
       if(item === "") {
         check = true;
         console.log('ghgghg')

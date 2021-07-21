@@ -15,7 +15,7 @@ function DeskBoard() {
  
                     <Link style={{ textDecoration: "none", color: "green" }} to={`/:${item.quizname}`} >
                         {
-                            item.quizname
+                            item.quizName
                         }
                     </Link>
                {/* </Button> */}
