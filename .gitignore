@@ -13,7 +13,9 @@
 
 # production
 /build
-
+/maincreate.js
+/NewQuizCreate.js
+/MQuizPage.js
 # misc
 .DS_Store
 .env.local
